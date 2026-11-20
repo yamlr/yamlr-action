@@ -1,6 +1,7 @@
 # Official GitHub Action for Yamlr
 
-[![GitHub Action](https://img.shields.io/badge/GitHub%20Action-Yamlr-blue?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/yamlr/action)
+[![GitHub Action](https://img.shields.io/badge/GitHub%20Action-Yamlr-blue?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/yamlr/yamlr-action)
+[![Version](https://img.shields.io/badge/Release-v0.1.2-blue?style=flat-square)](https://github.com/yamlr/yamlr-action/releases)
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First%20%7C%20Zero%20Egress-brightgreen?style=flat-square)]()
 [![SARIF Upload](https://img.shields.io/badge/SARIF-GitHub%20Code%20Scanning-orange?style=flat-square)]()
 
@@ -34,12 +35,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Yamlr Audit
-        uses: yamlr/action@v0.1.0
+        uses: yamlr/yamlr-action@v0.1.2
         with:
           path: "./k8s"
           k8s-version: "1.31"
           output: "sarif"
-          sarif-file: "yamlr-results.sarif"
+          output-file: "yamlr-results.sarif"
           fail-on: "error"
 
       - name: Upload Results to GitHub Code Scanning
@@ -53,7 +54,7 @@ jobs:
 
 ## 🩹 Automated PR Auto-Healing (GitOps Workflow)
 
-Automatically heal broken manifests and submit fixes back into Pull Requests:
+Automatically heal broken manifests and submit fixes back into Pull Requests with comment preservation:
 
 ```yaml
 name: "Yamlr Auto-Heal"
@@ -75,7 +76,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Run Yamlr Heal
-        uses: yamlr/action@v0.1.0
+        uses: yamlr/yamlr-action@v0.1.2
         with:
           command: "heal"
           apply: true
@@ -85,6 +86,21 @@ jobs:
         with:
           commit_message: "chore(k8s): auto-heal manifest schema & deprecation errors [skip ci]"
 ```
+
+---
+
+## 📊 Inputs Reference
+
+| Input | Description | Default | Required |
+| :--- | :--- | :---: | :---: |
+| `path` | Path to manifests (file or directory) | `.` | No |
+| `command` | Execution mode: `scan`, `heal`, `fmt`, or `diff` | `scan` | No |
+| `k8s-version` | Target Kubernetes version schema (e.g. `1.30`, `1.31`, `1.36`) | `1.36` | No |
+| `apply` | Automatically apply suggested fixes in-place (when command is `heal`) | `false` | No |
+| `fail-on` | Failure severity threshold: `error`, `warning` | `error` | No |
+| `output` | Output format: `human`, `sarif`, or `json` | `human` | No |
+| `output-file` | Path to write structured report (e.g. `results.sarif`) | — | No |
+| `version` | Specific Yamlr release tag to install from official CDN | `v0.1.2` | No |
 
 ---
 

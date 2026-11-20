@@ -29,10 +29,16 @@ inputs:
     description: 'Output format: human, sarif, or json'
     required: false
     default: 'human'
+  output-file:
+    description: 'Path to write structured report (e.g. results.sarif)'
+    required: false
+  sarif-file:
+    description: 'Alias for output-file'
+    required: false
   version:
     description: 'Yamlr version tag to install'
     required: false
-    default: 'v0.1.0'
+    default: 'v0.1.2'
 
 runs:
   using: 'composite'
@@ -58,6 +64,8 @@ runs:
         YAMLR_APPLY: ${{ inputs.apply }}
         YAMLR_FAIL_ON: ${{ inputs.fail-on }}
         YAMLR_OUTPUT: ${{ inputs.output }}
+        YAMLR_OUTPUT_FILE: ${{ inputs.output-file }}
+        YAMLR_SARIF_FILE: ${{ inputs.sarif-file }}
         YAMLR_K8S_VERSION: ${{ inputs.k8s-version }}
       run: |
         CMD=(yamlr "$YAMLR_COMMAND" "$YAMLR_PATH")
@@ -72,6 +80,14 @@ runs:
 
         if [ -n "$YAMLR_OUTPUT" ] && [ "$YAMLR_OUTPUT" != "human" ]; then
           CMD+=(--output "$YAMLR_OUTPUT")
+        fi
+
+        TARGET_OUT_FILE="$YAMLR_OUTPUT_FILE"
+        if [ -z "$TARGET_OUT_FILE" ]; then
+          TARGET_OUT_FILE="$YAMLR_SARIF_FILE"
+        fi
+        if [ -n "$TARGET_OUT_FILE" ]; then
+          CMD+=(--output-file "$TARGET_OUT_FILE")
         fi
 
         if [ -n "$YAMLR_K8S_VERSION" ]; then
