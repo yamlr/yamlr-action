@@ -95,7 +95,7 @@ jobs:
 | :--- | :--- | :---: | :---: |
 | `path` | Path to manifests (file or directory) | `.` | No |
 | `command` | Execution mode: `scan`, `heal`, `fmt`, or `diff` | `scan` | No |
-| `k8s-version` | Target Kubernetes version schema (e.g. `1.30`, `1.31`, `1.36`) | `1.36` | No |
+| `k8s-version` | Target Kubernetes version schema (e.g. `1.28`, `1.30`, `1.31`) | `1.31` | No |
 | `apply` | Automatically apply suggested fixes in-place (when command is `heal`) | `false` | No |
 | `fail-on` | Failure severity threshold: `error`, `warning` | `error` | No |
 | `output` | Output format: `human`, `sarif`, or `json` | `human` | No |

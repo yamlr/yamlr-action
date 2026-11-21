@@ -15,8 +15,9 @@ inputs:
     required: false
     default: 'scan'
   k8s-version:
-    description: 'Target Kubernetes version (e.g., 1.36; default: 1.36)'
+    description: 'Target Kubernetes version (e.g., 1.31; default: 1.31)'
     required: false
+    default: '1.31'
   apply:
     description: 'Automatically apply suggested fixes in-place'
     required: false
