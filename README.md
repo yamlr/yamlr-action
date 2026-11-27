@@ -1,7 +1,7 @@
 # Official GitHub Action for Yamlr
 
 [![GitHub Action](https://img.shields.io/badge/GitHub%20Action-Yamlr-blue?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/yamlr/yamlr-action)
-[![Version](https://img.shields.io/badge/Release-v0.1.3-blue?style=flat-square)](https://github.com/yamlr/yamlr-action/releases)
+[![Version](https://img.shields.io/badge/Release-v0.1.4-blue?style=flat-square)](https://github.com/yamlr/yamlr-action/releases)
 [![Security: Local-First](https://img.shields.io/badge/Security-Local--First%20%7C%20Zero%20Egress-brightgreen?style=flat-square)]()
 [![SARIF Upload](https://img.shields.io/badge/SARIF-GitHub%20Code%20Scanning-orange?style=flat-square)]()
 
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Yamlr Audit
-        uses: yamlr/yamlr-action@v0.1.3
+        uses: yamlr/yamlr-action@v0.1.4
         with:
           path: "./k8s"
           k8s-version: "1.36"
