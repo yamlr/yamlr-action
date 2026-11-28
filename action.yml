@@ -1,6 +1,6 @@
 name: 'Yamlr: The Kubernetes Configuration Resolution Plane'
 description: 'Reconcile and repair Kubernetes configurations before deployment.'
-author: 'Yamlr / Timonel Labs'
+author: 'Yamlr / Yamlr Inc'
 branding:
   icon: 'shield'
   color: 'blue'
